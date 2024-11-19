@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/navigation_hotels"
+        android:name="com.example.hotelbooking.ui.hotels.HotelsFragment"
+        android:label="Hoteles"/>
+
+    <fragment
+        android:id="@+id/navigation_reservations"
+        android:name="com.example.hotelbooking.ui.reservations.ReservationsFragment"
+        android:label="Reservas"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.hotelbooking.ui.profile.ProfileFragment"
+        android:label="Perfil"/>
+
+</navigation>
