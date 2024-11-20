@@ -4,18 +4,18 @@
     android:id="@+id/nav_graph">
 
     <fragment
-        android:id="@+id/navigation_hotels"
-        android:name="com.example.hotelbooking.ui.hotels.HotelsFragment"
+        android:id="@+id/navigation_hotel"
+        android:name="com.example.hoteljjd.HotelFragment"
         android:label="Hoteles"/>
 
     <fragment
-        android:id="@+id/navigation_reservations"
-        android:name="com.example.hotelbooking.ui.reservations.ReservationsFragment"
+        android:id="@+id/navigation_reservacion"
+        android:name="com.example.hoteljjd.ReservacionFragment"
         android:label="Reservas"/>
 
     <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.example.hotelbooking.ui.profile.ProfileFragment"
+        android:id="@+id/navigation_perfil"
+        android:name="com.example.hoteljjd.PerfilFragment"
         android:label="Perfil"/>
 
 </navigation>
