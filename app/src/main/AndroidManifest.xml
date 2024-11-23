@@ -18,7 +18,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".HotelActivity"
+            android:name=".NavigationActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_hotels"
+        android:id="@+id/navigation_hotel"
         android:icon="@drawable/location_dot_solid"
         android:title="Hoteles"/>
     <item
-        android:id="@+id/navigation_reservations"
+        android:id="@+id/navigation_reservacion"
         android:icon="@drawable/calendar_solid"
         android:title="Reservas"/>
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_perfil"
         android:icon="@drawable/circle_user_solid"
         android:title="Perfil"/>
 </menu>

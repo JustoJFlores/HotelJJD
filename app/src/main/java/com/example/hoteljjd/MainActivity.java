@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         SessionManager.saveToken(MainActivity.this, loginResponse.getToken());
 
                         // Navigate to Hotel Activity
-                        Intent intent = new Intent(MainActivity.this, HotelActivity.class);
+                        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
