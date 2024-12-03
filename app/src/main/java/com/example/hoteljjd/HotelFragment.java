@@ -22,10 +22,8 @@ import com.example.hoteljjd.api.ApiClient;
 import com.example.hoteljjd.api.ApiService;
 import com.example.hoteljjd.model.Hotel;
 import com.example.hoteljjd.model.HotelResponse;
-import com.example.hoteljjd.utils.SessionManager;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -110,7 +108,7 @@ public class HotelFragment extends Fragment implements OnMapReadyCallback {
                             Marker marker = mMap.addMarker(new MarkerOptions()
                                     .position(hotelLocation)
                                     .title(hotel.getNombre())
-                                    .snippet("Precio: $" + hotel.getPrecioPorNoche() + " | Calificación: " + hotel.getCalificacion()));
+                                    .snippet("Calificación: " + hotel.getCalificacion()));
 
                             // Asociar el marcador con su respectivo hotel
                             marker.setTag(hotel);

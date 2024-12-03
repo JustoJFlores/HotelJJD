@@ -8,10 +8,6 @@ public class Hotel {
     private String nombre;
     private String descripcion;
     private String direccion;
-
-    @SerializedName("precio_por_noche")
-    private double precioPorNoche;  // Usamos 'double' ya que es un valor numérico
-
     private double calificacion;
     private String urlImagen;
     private Double latitud;
@@ -48,14 +44,6 @@ public class Hotel {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public double getPrecioPorNoche() {
-        return precioPorNoche;
-    }
-
-    public void setPrecioPorNoche(double precioPorNoche) {
-        this.precioPorNoche = precioPorNoche;
     }
 
     public double getCalificacion() {
@@ -97,7 +85,6 @@ public class Hotel {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", precioPorNoche=" + precioPorNoche +
                 ", calificacion=" + calificacion +
                 ", urlImagen='" + urlImagen + '\'' +
                 ", latitud=" + latitud +

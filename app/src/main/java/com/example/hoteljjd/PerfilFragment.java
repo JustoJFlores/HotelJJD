@@ -1,20 +1,19 @@
 package com.example.hoteljjd;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hoteljjd.api.ApiClient;
+import androidx.fragment.app.Fragment;
+
 import com.example.hoteljjd.api.ApiService;
+import com.example.hoteljjd.api.ApiClient;
 import com.example.hoteljjd.model.Usuario;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.hoteljjd.model.UsuarioResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,40 +21,73 @@ import retrofit2.Response;
 
 public class PerfilFragment extends Fragment {
 
-    private TextInputEditText profileNameEditText;
-    private TextInputEditText profileEmailEditText;
-    com.example.hoteljjd.utils.SessionManager sessionManager;
+    private TextView tvName, tvEmail;
+    private ApiService apiService;
+    private SessionManager sessionManager; // Instancia de SessionManager
 
-    @Nullable
+    public PerfilFragment() {
+        // Constructor vacío
+    }
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflar el layout para este fragmento
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-        profileNameEditText = view.findViewById(R.id.profileNameEditText);
-        profileEmailEditText = view.findViewById(R.id.profileEmailEditText);
 
-        // Suponiendo que tienes el token de autenticación
-        String token = sessionManager.getToken();
+        // Inicializar los TextViews
+        tvName = view.findViewById(R.id.tvName);
+        tvEmail = view.findViewById(R.id.tvEmail);
 
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        Call<Usuario> call = apiService.getUserInfo(token);
-        call.enqueue(new Callback<Usuario>() {
+        // Inicializar SessionManager
+        sessionManager = new SessionManager(getContext());
+
+        // Inicializar el servicio de API usando ApiClient
+        apiService = ApiClient.getClient().create(ApiService.class);
+
+        // Obtener el token de autenticación usando SessionManager
+        String authToken = "Bearer " + sessionManager.getToken(); // Obtén el token
+
+        // Verificar que el token no sea nulo
+        if (authToken != null) {
+            // Llamar al método para obtener el perfil si el token es válido
+            getUserProfile(authToken);
+        } else {
+            // Manejar caso en que no se tiene token
+            Toast.makeText(getContext(), "No se encuentra el token de autenticación", Toast.LENGTH_SHORT).show();
+        }
+
+        return view;
+    }
+
+    // Método para obtener el perfil del usuario
+    private void getUserProfile(String authToken) {
+        // Llamada a la API para obtener la información del usuario
+        Call<UsuarioResponse> call = apiService.getUserProfile(authToken);
+
+        call.enqueue(new Callback<UsuarioResponse>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Usuario user = response.body();
-                    profileNameEditText.setText(user.getName());
-                    profileEmailEditText.setText(user.getEmail());
+                    // Obtener el usuario de la respuesta
+                    UsuarioResponse usuarioResponse = response.body();
+                    Usuario usuario = usuarioResponse.getData(); // Acceder al objeto Usuario
+
+                    // Actualizar los TextViews con la información del usuario
+                    tvName.setText(usuario.getName());
+                    tvEmail.setText(usuario.getEmail());
                 } else {
-                    Toast.makeText(getContext(), "Error al obtener la información del usuario", Toast.LENGTH_SHORT).show();
+                    // Manejar error
+                    Toast.makeText(getContext(), "Error al obtener el perfil", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<UsuarioResponse> call, Throwable t) {
+                // Manejar error de solicitud
+                Log.e("PerfilFragment", "Error en la solicitud: " + t.getMessage());
+                Toast.makeText(getContext(), "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
 }

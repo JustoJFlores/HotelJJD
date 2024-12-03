@@ -12,7 +12,6 @@ import com.example.hoteljjd.api.ApiClient;
 import com.example.hoteljjd.api.ApiService;
 import com.example.hoteljjd.model.LoginRequest;
 import com.example.hoteljjd.model.LoginResponse;
-import com.example.hoteljjd.utils.SessionManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;

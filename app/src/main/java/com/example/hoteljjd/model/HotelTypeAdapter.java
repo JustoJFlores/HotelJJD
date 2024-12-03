@@ -17,7 +17,6 @@ public class HotelTypeAdapter implements JsonSerializer<Hotel>, JsonDeserializer
         jsonObject.addProperty("nombre", hotel.getNombre());
         jsonObject.addProperty("descripcion", hotel.getDescripcion());
         jsonObject.addProperty("direccion", hotel.getDireccion());
-        jsonObject.addProperty("precio_por_noche", hotel.getPrecioPorNoche());  // Se serializa correctamente
         jsonObject.addProperty("calificacion", hotel.getCalificacion());
         jsonObject.addProperty("url_imagen", hotel.getUrlImagen());
         jsonObject.addProperty("latitud", hotel.getLatitud());
@@ -34,15 +33,6 @@ public class HotelTypeAdapter implements JsonSerializer<Hotel>, JsonDeserializer
         hotel.setNombre(jsonObject.get("nombre").getAsString());
         hotel.setDescripcion(jsonObject.get("descripcion").getAsString());
         hotel.setDireccion(jsonObject.get("direccion").getAsString());
-
-        // Convertimos el precio (en formato String) a double
-        String precioPorNocheString = jsonObject.get("precio_por_noche").getAsString();
-        try {
-            hotel.setPrecioPorNoche(Double.parseDouble(precioPorNocheString));
-        } catch (NumberFormatException e) {
-            hotel.setPrecioPorNoche(0.0);  // Si no se puede parsear, ponemos el valor por defecto
-        }
-
         hotel.setCalificacion(jsonObject.get("calificacion").getAsDouble());
         hotel.setUrlImagen(jsonObject.get("url_imagen").getAsString());
         hotel.setLatitud(jsonObject.get("latitud").getAsDouble());

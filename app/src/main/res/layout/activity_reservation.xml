@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/room_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Habitación seleccionada: 101"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seleccionar fecha inicio"
+        android:focusable="false"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seleccionar fecha fin"
+        android:focusable="false"
+        android:inputType="none" />
+
+    <Button
+        android:id="@+id/btn_reserve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reservar" />
+</LinearLayout>

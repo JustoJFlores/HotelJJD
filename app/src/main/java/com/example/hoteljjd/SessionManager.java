@@ -1,7 +1,8 @@
-package com.example.hoteljjd.utils;
+package com.example.hoteljjd;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SessionManager {
     private static final String PREF_NAME = "UserSession";
@@ -17,9 +18,10 @@ public class SessionManager {
     }
 
     // Guardar el token y el ID del usuario
-    public void saveSession(String token, int userId) {
+    public void saveSession(String token, long userId) {
+        Log.d("SessionManager", "Guardando el user_id: " + userId);  // Verifica el valor antes de guardar
         editor.putString(KEY_TOKEN, token);
-        editor.putInt(KEY_USER_ID, userId);
+        editor.putLong(KEY_USER_ID, userId);  // Asegúrate de que se guarda como long
         editor.apply();
     }
 
@@ -29,12 +31,15 @@ public class SessionManager {
     }
 
     // Obtener el ID del usuario
-    public int getUserId() {
-        return sharedPreferences.getInt(KEY_USER_ID, -1);
+    public long getUserId() {
+        long userId = sharedPreferences.getLong(KEY_USER_ID, -1);  // Asegúrate de que sea long
+        Log.d("SessionManager", "Recuperando el user_id: " + userId);  // Verifica el valor recuperado
+        return userId;
     }
 
     // Eliminar la sesión
     public void clearSession() {
+        Log.d("SessionManager", "Limpiando sesión...");
         editor.clear();
         editor.apply();
     }

@@ -25,11 +25,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="My Reservations"
+                    android:text="Mis Reservaciones"
                     android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-                <!-- Add RecyclerView or other components for reservations list -->
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/tv_empty_reservations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No hay reservaciones"
+                        android:textAlignment="center"
+                        android:visibility="gone"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewReservations"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

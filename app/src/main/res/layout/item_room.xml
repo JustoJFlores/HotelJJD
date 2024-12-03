@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tvNumeroHabitacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habitación"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvPrecioPorNoche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvDisponibilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponibilidad"
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_green_dark" />
+
+</LinearLayout>

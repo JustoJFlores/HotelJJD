@@ -1,11 +1,22 @@
 package com.example.hoteljjd.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Usuario {
 
+    @SerializedName("id")  // Asegúrate de que estas claves coincidan con el JSON
     private int id;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("password")
     private String password;
+
+    @SerializedName("createdAt")
     private String createdAt;
 
     // Getters y setters
