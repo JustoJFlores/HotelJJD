@@ -3,6 +3,7 @@ package com.example.hoteljjd;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import com.example.hoteljjd.api.ApiClient;
 import com.example.hoteljjd.api.ApiService;
 import com.example.hoteljjd.model.LoginRequest;
 import com.example.hoteljjd.model.LoginResponse;
+import com.example.hoteljjd.model.Usuario;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,15 +79,26 @@ public class MainActivity extends AppCompatActivity {
                     LoginResponse loginResponse = response.body();
                     if (loginResponse.isSuccess()) {
                         String token = loginResponse.getToken();
-                        int userId = 123; // Asigna aquí el ID que obtendrás de la respuesta real.
+                        Usuario usuario = loginResponse.getUsuario(); // Obtener el objeto Usuario
 
-                        // Guardar token e ID en SessionManager
-                        sessionManager.saveSession(token, userId);
+                        if (usuario != null) {
+                            long userId = usuario.getId();
+                            String userName = usuario.getName();
 
-                        // Navegar a NavigationActivity
-                        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                            // Guardar token, ID, nombre y el objeto Usuario completo en SessionManager
+                            sessionManager.saveSession(token, userId, userName);
+                            sessionManager.setCurrentUser(usuario); // Guardar el usuario completo
+
+                            // Debug: Log para verificar el guardado
+                            Log.d("MainActivity", "Usuario guardado en sesión: " + usuario.getName());
+
+                            // Navegar a NavigationActivity
+                            Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error: Usuario no encontrado", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(MainActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -100,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

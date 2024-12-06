@@ -39,7 +39,7 @@ public class ReservacionFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewReservations);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        reservationAdapter = new ReservationAdapter();
+        reservationAdapter = new ReservationAdapter(getContext());
         recyclerView.setAdapter(reservationAdapter);
 
         fetchReservations();

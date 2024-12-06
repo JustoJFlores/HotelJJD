@@ -1,8 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.HotelJJD" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.HotelJJD" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryContainer">#E8EAF6</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/dialog_background</item>
+        <item name="android:textColorSecondary">@color/colorSecondary</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/CustomNegativeButton</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/CustomPositiveButton</item>
+    </style>
+
+    <style name="CustomPositiveButton">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/button_positive_background</item>
+    </style>
+
+    <style name="CustomNegativeButton">
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:background">@drawable/button_negative_background</item>
     </style>
 
     <style name="Theme.HotelJJD" parent="Base.Theme.HotelJJD" />

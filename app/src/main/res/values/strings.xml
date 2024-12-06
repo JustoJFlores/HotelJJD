@@ -2,4 +2,28 @@
     <string name="app_name">HotelJJD</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="bienvenida_usuario">¡Bienvenido, Usuario!</string>
+    <string name="explorar_hoteles">Explorar Hoteles</string>
+    <string name="welcome_icon">Icono de bienvenida</string>
+
+    <string name="mi_perfil">Mi Perfil</string>
+
+    <string name="profile_image">Imagen de perfil</string>
+
+    <string name="profile_picture">Foto de perfil</string>
+    <string name="profile_name">Ícono de nombre de perfil</string>
+    <string name="email_icon">Ícono de correo electrónico</string>
+    <string name="phone_icon">Ícono de teléfono</string>
+    <string name="address_icon">Ícono de dirección</string>
+    <string name="date_icon">Ícono de fecha de registro</string>
+
+    <string name="crear_reservacion">Reservar</string>
+    <string name="mis_reservaciones">Mis Reservaciones</string>
+    <string name="editar_perfil">Actualizar Perfil</string>
+
+    <style name="CircularShape" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

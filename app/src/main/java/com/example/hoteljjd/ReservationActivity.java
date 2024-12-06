@@ -11,11 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.hoteljjd.api.ApiClient;
 import com.example.hoteljjd.api.ApiService;
 import com.example.hoteljjd.model.Reservation;
+import com.example.hoteljjd.model.Room;
+import com.example.hoteljjd.model.RoomResponse;
+import com.example.hoteljjd.model.RoomResponseUpdated;
+import com.example.hoteljjd.model.RoomUpdated;
 import com.example.hoteljjd.model.UsuarioResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +29,7 @@ import retrofit2.Response;
 public class ReservationActivity extends AppCompatActivity {
 
     private EditText startDateEditText, endDateEditText;
-    private TextView roomNumberTextView;
+    private TextView roomNumberTextView, hotelNameTextView; // hotelNameTextView agregado
     private Button reserveButton;
     private Long roomId;
     private Double roomPrice;
@@ -39,11 +44,12 @@ public class ReservationActivity extends AppCompatActivity {
         startDateEditText = findViewById(R.id.start_date);
         endDateEditText = findViewById(R.id.end_date);
         roomNumberTextView = findViewById(R.id.room_number);
+        hotelNameTextView = findViewById(R.id.hotel_name); // Nuevo TextView para el hotel
         reserveButton = findViewById(R.id.btn_reserve);
 
         calendar = Calendar.getInstance();
 
-        // Si el room_id es un Integer, haz el cast explícito
+        // Obtener roomId y otros detalles
         Integer roomIdInteger = getIntent().getIntExtra("room_id", -1);
         roomId = roomIdInteger != null ? roomIdInteger.longValue() : -1L;
         roomPrice = getIntent().getDoubleExtra("room_price", 0.0);
@@ -57,6 +63,44 @@ public class ReservationActivity extends AppCompatActivity {
         }
 
         roomNumberTextView.setText("Habitación seleccionada: " + roomNumber);
+
+        // Llamar a la API para obtener la información de la habitación con su hotel asociado
+        SessionManager sessionManager = new SessionManager(this);
+        String token = sessionManager.getToken();
+
+        if (token == null || token.isEmpty()) {
+            Toast.makeText(this, "No se encontró el token de autorización", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.getRoomWithHotel(roomId, "Bearer " + token).enqueue(new Callback<RoomResponseUpdated>() {
+            @Override
+            public void onResponse(Call<RoomResponseUpdated> call, Response<RoomResponseUpdated> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    RoomResponseUpdated roomResponse = response.body();
+                    RoomUpdated room = roomResponse.getData(); // Obtenemos el objeto de habitación
+
+                    if (room != null) {
+                        // Mostrar el nombre del hotel y otros detalles
+                        hotelNameTextView.setText("Hotel: " + room.getHotel_nombre());
+                    } else {
+                        Toast.makeText(ReservationActivity.this, "No se encontró información de la habitación", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ReservationActivity.this, "No se pudo obtener la información de la habitación", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomResponseUpdated> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(ReservationActivity.this, "Error de conexión", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
 
         // Configurar los campos para abrir el calendario
         startDateEditText.setOnClickListener(v -> showDatePickerDialog(startDateEditText));
@@ -107,14 +151,14 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    int userId = response.body().getData().getId();
+                    long userId = response.body().getData().getId();
 
                     int nights = calculateNights(startDate, endDate);
                     Double totalPrice = nights * roomPrice;
 
                     Reservation reservation = new Reservation();
                     reservation.setRoom_id(roomId);
-                    reservation.setUser_id((long) userId);
+                    reservation.setUser_id(userId); // No necesitas convertirlo en Long nuevamente
                     reservation.setFecha_inicio(startDate);
                     reservation.setFecha_fin(endDate);
                     reservation.setPrecio_total(totalPrice);
@@ -168,3 +212,4 @@ public class ReservationActivity extends AppCompatActivity {
         }
     }
 }
+

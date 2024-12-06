@@ -8,6 +8,7 @@ public class Room {
     private double precio_por_noche;
     private boolean esta_disponible;
     private String creado_en;
+    private String url_imagen;
 
     // Getters y setters para todos los campos
     public int getId() {
@@ -64,5 +65,13 @@ public class Room {
 
     public void setCreado_en(String creado_en) {
         this.creado_en = creado_en;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 }

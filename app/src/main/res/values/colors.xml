@@ -2,6 +2,44 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF9E9E9E</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
 
 
+    <!--color name="primary">#6200EE</color-->
+    <color name="primary_dark">#3700B3</color>
+
+    <color name="primary">#3F51B5</color>
+    <color name="primaryText">#212121</color>
+    <color name="backgroundLight">#FAFAFA</color>
+    <color name="reservationExpired">#D3D3D3</color>  <!-- Gris claro para reservaciones finalizadas -->
+    <color name="reservationInProcess">#E8F5E9</color> <!-- Verde claro para reservaciones en proceso -->
+
+    <color name="md_theme_light_background">#FFFFFF</color>
+    <color name="md_theme_light_surface">#F1F1F1</color>
+    <color name="md_theme_light_onSurface">#212121</color>
+
+    <color name="colorPrimary">#6200EE</color> <!-- Puedes cambiar este color a tu preferido -->
+    <color name="colorSecondary">#03DAC6</color> <!-- Cambia este color si lo necesitas -->
+    <color name="colorAccent">#FF0000</color> <!-- Cambia este color según tu esquema -->
+    <color name="colorGrey">#B0BEC5</color> <!-- Un color gris para los botones negativos -->
+
+    <!-- Colores para estados de reservación -->
+    <color name="color_proxima">#E3F2FD</color>
+    <color name="color_texto_proxima">#1565C0</color>
+    <color name="color_fondo_proxima">#2196F3</color>
+
+    <color name="color_en_proceso">#FFF3E0</color>
+    <color name="color_texto_en_proceso">#E65100</color>
+    <color name="color_fondo_en_proceso">#FF9800</color>
+
+    <color name="color_finalizada">#E8F5E9</color>
+    <color name="color_texto_finalizada">#2E7D32</color>
+    <color name="color_fondo_finalizada">#4CAF50</color>
+
+    <color name="color_default">#F5F5F5</color>
+    <color name="color_overlay_finalizada">#99000000</color>
+
+    <color name="light_gray">#F0F0F0</color>
 </resources>

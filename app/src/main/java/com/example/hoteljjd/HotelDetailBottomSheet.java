@@ -32,6 +32,7 @@ public class HotelDetailBottomSheet extends BottomSheetDialogFragment {
         ImageView hotelImageView = view.findViewById(R.id.hotel_image);
         TextView direccionTextView = view.findViewById(R.id.hotel_direccion);
         RatingBar ratingBar = view.findViewById(R.id.hotel_rating);
+        TextView ratingValueTextView = view.findViewById(R.id.hotel_rating_value); // Referencia al TextView
         MaterialButton reservarButton = view.findViewById(R.id.button_reservar);
 
         // Establecer los datos del hotel
@@ -40,7 +41,11 @@ public class HotelDetailBottomSheet extends BottomSheetDialogFragment {
         direccionTextView.setText(hotel.getDireccion());
 
         // Configurar la calificación en el RatingBar
-        ratingBar.setRating((float) hotel.getCalificacion()); // Conversión de double a float
+        float rating = (float) hotel.getCalificacion(); // Conversión de double a float
+        ratingBar.setRating(rating);
+
+        // Actualizar el valor del TextView con la calificación
+        ratingValueTextView.setText(String.valueOf(rating));
 
         // Cargar la imagen del hotel con Glide
         Glide.with(getContext())
@@ -50,7 +55,7 @@ public class HotelDetailBottomSheet extends BottomSheetDialogFragment {
         // Configurar el botón Reservar
         reservarButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), RoomListActivity.class);
-            intent.putExtra("hotel_id",(long) hotel.getId());
+            intent.putExtra("hotel_id", (long) hotel.getId());
             startActivity(intent);
         });
 

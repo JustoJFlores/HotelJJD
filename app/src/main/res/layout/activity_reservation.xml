@@ -1,38 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
-    <TextView
-        android:id="@+id/room_number"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Habitación seleccionada: 101"
-        android:textStyle="bold"
-        android:paddingBottom="8dp"/>
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:id="@+id/start_date"
+        <LinearLayout
+            android:background="@drawable/background_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <!-- Imagen con tamaño fijo y alineación ajustada -->
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="@string/welcome_icon"
+                android:src="@drawable/hoteljjd"
+                android:scaleType="centerCrop" />
+
+            <!-- Texto alineado verticalmente con la imagen -->
+            <TextView
+                android:id="@+id/tvBienvenida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crear_reservacion"
+                android:textColor="@color/primaryText"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="start|center_vertical"
+                tools:text="Reservar" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Seleccionar fecha inicio"
-        android:focusable="false"
-        android:inputType="none" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/card_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:id="@+id/end_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Seleccionar fecha fin"
-        android:focusable="false"
-        android:inputType="none" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/backgroundLight">
 
-    <Button
-        android:id="@+id/btn_reserve"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reservar" />
-</LinearLayout>
+            <!-- Información del hotel -->
+            <TextView
+                android:id="@+id/hotel_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotel: "
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
+                android:paddingBottom="12dp" />
+
+            <!-- Información de la habitación -->
+            <TextView
+                android:id="@+id/room_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Habitación seleccionada: 201"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
+                android:paddingBottom="12dp" />
+
+            <!-- Campo para fecha de inicio -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fecha inicio"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/start_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:drawableEnd="@drawable/calendar_solid" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo para fecha de fin -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fecha fin"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/primary"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/end_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:drawableEnd="@drawable/calendar_solid" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón reservar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reserve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reservar"
+                android:layout_marginTop="24dp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/primary" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
